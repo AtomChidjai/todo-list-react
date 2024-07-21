@@ -2,29 +2,27 @@ import express from 'express';
 import router from './routers/route.js'
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser'
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use(express.json());
+app.use(cors());
 
 app.use('/auth', router);
 
-app.listen(3000, () => {
-    console.log('Server is running');
-});
+mongoose.connect(process.env.MONGO_DB_CONNECTION)
+.then( () => {
+    console.log('MongoDB connected');
+})
+.catch( (err) => {
+    console.log(`MONGO ERROR : ${err}`)
+})
 
-// mongoose.connect(process.env.MONGO_DB_CONNECTION, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
-// .then( () => {
-//     console.log('MongoDB connected');
-//     app.listen(3000, () => {
-//         console.log('Server is running');
-//     });
-// })
-// .catch((err) => {
-//     console.log(`MONGODB ERROR : ${err}`);
-// })
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on PORT : ${process.env.PORT}`);
+});

@@ -2,17 +2,17 @@ import mongoose from "mongoose";
 
 const { Schema, model } = mongoose; 
 
-const taskSchema = new Schema({
-    userId : {
-        type : Number,
+const userSchema = new Schema({
+    username : {
+        type : String,
         required : true,
     },
-    content : {
+    password : {
         type : String,
         required : true,
     },
 }, { timestamps : true})
 
-const Task = model('Task', taskSchema);
+const User = model('User', userSchema);
 
-export default Task;
+export default User;
