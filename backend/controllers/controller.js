@@ -1,6 +1,12 @@
 import Task from '../models/model.js';
 import User from '../models/model2.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function getResponse(req, res) {
     const { userId } = req.params
@@ -98,22 +104,29 @@ export async function registerResponse(req, res) {
 
 export async function loginResponse(req, res) {
     const { username, password } = req.body;
-
     try {
         const user = await User.findOne({ username });
-
         if (!user) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
-
         const isMatch = await bcrypt.compare(password, user.password);
-
         if (!isMatch) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
+        const token = jwt.sign(
+            { userId: user._id, username: user.username },
+            JWT_SECRET,
+            { expiresIn: '1h' }
+        );
 
-        return res.status(200).json({ message : 'Login Successfully'});
-    
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 3600000
+        });
+
+        return res.status(200).json({ message: 'Login Successfully', token });
+
     } catch (err) {
         res.status(500).json({ error: `Error occurred: ${err.message}` });
     }
@@ -130,6 +143,18 @@ export async function deleteUserResponse(req, res) {
         }
 
         return res.status(200).json({ message: 'User deleted successfully' });
+    } catch (err) {
+        return res.status(500).json({ error: `Error occurred: ${err.message}` });
+    }
+}
+
+export async function logoutResponse (req, res) {
+    try {
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+        });
+        return res.status(200).json({ message: 'Logout Successfully' });
     } catch (err) {
         return res.status(500).json({ error: `Error occurred: ${err.message}` });
     }

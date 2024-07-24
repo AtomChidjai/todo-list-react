@@ -3,13 +3,14 @@ import router from './routers/route.js'
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
-
 dotenv.config();
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 

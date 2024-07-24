@@ -5,18 +5,20 @@ import { getResponse,
         deleteResponse, 
         registerResponse, 
         loginResponse, 
-        deleteUserResponse 
+        deleteUserResponse,
+        logoutResponse
     } from '../controllers/controller.js';
-import { validateUser, validateId } from '../middleware/middleware.js';
+import { validateUser, validateId, authenticateToken } from '../middleware/middleware.js';
 
 const router = express.Router();
 
-router.get('/:userId', getResponse);
-router.post('/post', postResponse);
-router.put('/update/:userId', updateResponse);
-router.delete('/del/:userId', deleteResponse);
+router.get('/:userId', authenticateToken, getResponse);
+router.post('/post', authenticateToken, postResponse);
+router.put('/update/:userId', authenticateToken, updateResponse);
+router.delete('/del/:userId', authenticateToken, deleteResponse);
 router.post('/register', validateUser, registerResponse);
 router.post('/login', validateUser, loginResponse);
-router.post('/del-user', validateId, deleteUserResponse);
+router.post('/del-user', authenticateToken, validateId, deleteUserResponse);
+router.post('/logout', authenticateToken, logoutResponse);
 
 export default router;
