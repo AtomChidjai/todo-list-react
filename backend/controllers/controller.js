@@ -9,7 +9,7 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function getResponse(req, res) {
-    const { userId } = req.params
+    const userId = req.user?.decodedPayload?.userId;
     
     if (!userId) {
         return res.status(400).json({ error : 'User ID is not found'});
@@ -25,7 +25,9 @@ export async function getResponse(req, res) {
 
 export async function updateResponse (req, res) {
     const { content } = req.body;
-    const { userId } = req.params;
+    const { taskId } = req.params;
+    
+    const userId = req.user?.decodedPayload?.userId;
 
     if (!userId) {
         return res.status(400).json({ error : 'User ID is required'});
@@ -34,7 +36,7 @@ export async function updateResponse (req, res) {
         const updatedObject = { content };
 
         const updatedTask = await Task.findOneAndUpdate(
-            {userId},
+            { _id: taskId, userId }, // checks if its have corresponding userId and TaskId
             updatedObject,
             { new : true }
         );
@@ -50,12 +52,14 @@ export async function updateResponse (req, res) {
 } 
 
 export async function deleteResponse(req, res) {
-    const { userId } = req.params;
+    const userId = req.user?.decodedPayload?.userId;
+    const { taskId } = req.params;
+
     if (!userId) {
         return res.status(400).json({ error: 'User ID is required' });
     }
     try {
-        const deletedTask = await Task.findOneAndDelete(userId);
+        const deletedTask = await Task.findOneAndDelete(taskId);
         
         if (!deletedTask) {
             return res.status(404).json({ error: 'Task not found' });
@@ -68,7 +72,10 @@ export async function deleteResponse(req, res) {
 }
 
 export async function postResponse(req, res) {
-    const { userId, content } = req.body;
+    const { content } = req.body;
+
+    const userId = req.user?.decodedPayload?.userId;
+
     if (!userId || !content) {
         return res.status(400).json({ error: 'User ID and content are required' });
     }

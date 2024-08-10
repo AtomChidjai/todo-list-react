@@ -31,13 +31,31 @@ export function authenticateToken (req, res, next) {
     if (!token) {
         return res.status(401).json({ message : 'NO TOKEN!'})
     }
-
+    
     jwt.verify(token, JWT_SECRET, (err, user) => {
         if (err) {
             return res.status(403).json({ message : 'INVALID OR EXPIRED TOKEN!'})
         }
 
         req.user = user;
+        req.user.token = token;
+        next();
+    });
+}
+
+export function decodedToken (req, res, next) {
+    const token = req.user.token;
+
+    if (!token) {
+        return res.status(401).json({ message : 'NO TOKEN (DECODED)!'})
+    }
+
+    jwt.verify(token, JWT_SECRET, (err, decodedPayload) => {
+        if (err) {
+            return res.status(403).json({ message : 'INVALID OR EXPIRED TOKEN (DECODED)!'})
+        }
+
+        req.user.decodedPayload = decodedPayload;
         next();
     });
 }
