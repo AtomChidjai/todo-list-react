@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Card from './Card';
 
 const HomePage = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -62,16 +63,34 @@ const HomePage = () => {
         LOGOUT
       </div>
       <div className='bg-blue-500 w-full h-[90px]'></div>
-      <div className='ml-5 bg-green-100 mr-5'>
-        <h1 className='mt-[25px] font-bold text-[25px]'>Dash-Board</h1>
-        <input
-          type="text"
-          placeholder="Type here"
-          className="input input-bordered input-info w-full max-w-xs mt-5"
-        />
-        <button className='btn bg-blue-400 ml-3 text-white'>Add</button>
-        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-        
+      <div className='mx-auto w-full'>
+
+        <div className='text-center'>
+          <h1 className='mt-[25px] font-bold text-[25px]'>Dash-Board</h1>
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered input-info w-[600px] mt-5"
+          />
+          <button className='btn bg-blue-600 ml-3 text-white'>Add</button>
+        </div>
+
+        <div className='mt-5 flex justify-center'> 
+          <div className='flex flex-wrap w-auto'>
+            
+
+            {data.length > 0 ? (
+              data.map((item, index) => (
+                <Card key={index} desc={item.content} />
+              ))
+            ) : (
+              <p>No data available. 😔</p>
+            )}
+
+            
+          </div>
+        </div>
+
       </div>
     </>
   );
