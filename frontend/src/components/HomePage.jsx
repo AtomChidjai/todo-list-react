@@ -35,15 +35,19 @@ const HomePage = () => {
 
   return (
     <>
-      <div className='absolute font-black text-[30px] left-[20px] top-[20px] block hover:cursor-pointer'>TODOLIST ✅</div>
+      <div className='absolute font-black text-[30px] text-white left-[20px] top-[20px] block hover:cursor-pointer'>TODOLIST ✅</div>
       <div className='btn btn-error absolute text-[15px] text-white right-[20px] top-[20px] hover:cursor-pointer'>LOGOUT</div>
+      <div className='bg-blue-500 w-full h-[90px]'></div>
 
-      <h1 className='mt-[100px]'>DashBoard</h1>
+      <h1 className='mt-[50px] font-black'>Dash-Board</h1>
+
       <button onClick={fetchData} disabled={loading}>
         {loading ? 'Loading...' : 'Fetch Data'}
       </button>
+
       {error && <p>Error: {error}</p>}
       {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+
     </>
   );
 };
