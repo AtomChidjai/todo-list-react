@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom' 
 
 const LoginPage = () => {
+
   return (
     <>
       <div className='flex h-screen'>
@@ -37,7 +39,7 @@ const LoginPage = () => {
             </label>
             <button className='flex btn btn-primary w-[450px] mx-auto text-[15px]'>Sign In</button>
 
-            <div className='text-center mx-auto mt-[40px]'>New to our website? <a className="link link-info">Create account</a> </div>
+            <div className='text-center mx-auto mt-[40px]'>New to our website? <Link to='/register' className="link link-info">Create account</Link> </div>
 
           </div>
 

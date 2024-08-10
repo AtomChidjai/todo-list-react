@@ -50,7 +50,7 @@ const RegisterPage = () => {
                         </label>
                         <button className='flex btn btn-primary w-[450px] mx-auto text-[15px]'>Sign Up</button>
 
-                        <div className='text-center mx-auto mt-[40px]'>New to our website? <a className="link link-info">Create account</a> </div>
+                        <div className='text-center mx-auto mt-[40px]'>Already have an acocout? <a className="link link-info">Sign In</a> </div>
 
                     </div>
 
