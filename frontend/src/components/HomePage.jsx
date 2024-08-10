@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const [data, setData] = useState(null);
@@ -8,46 +8,71 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      const response = await fetch('/auth', {
-        method: 'GET',
-        credentials: 'include',
-      });
-      console.log(response)
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      try {
+        const response = await fetch('/auth', {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        setData(result);
+        console.log('Response:', result);
+      } catch (error) {
+        setError(error.message);
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const result = await response.json();
-      setData(result);
-      console.log('Response:', result);
+    fetchData();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/auth/logout', { method: 'POST', credentials: 'include' });
+      if (response.ok) {
+        navigate('/');
+      } else {
+        console.error('Logout failed');
+      }
     } catch (error) {
-      setError(error.message);
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
+      console.error('Logout error:', error);
     }
   };
 
   return (
     <>
-      <div className='absolute font-black text-[30px] text-white left-[20px] top-[20px] block hover:cursor-pointer'>TODOLIST ✅</div>
-      <div className='btn btn-error absolute text-[15px] text-white right-[20px] top-[20px] hover:cursor-pointer'>LOGOUT</div>
+      <div className='absolute font-black text-[30px] text-white left-[20px] top-[20px] block hover:cursor-pointer'>
+        TODOLIST ✅
+      </div>
+      <div
+        className='btn btn-error absolute text-[15px] text-white right-[20px] top-[20px] hover:cursor-pointer'
+        onClick={handleLogout}
+      >
+        LOGOUT
+      </div>
       <div className='bg-blue-500 w-full h-[90px]'></div>
-
-      <h1 className='mt-[50px] font-black'>Dash-Board</h1>
-
-      <button onClick={fetchData} disabled={loading}>
-        {loading ? 'Loading...' : 'Fetch Data'}
-      </button>
-
-      {error && <p>Error: {error}</p>}
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-
+      <div className='ml-5 bg-green-100 mr-5'>
+        <h1 className='mt-[25px] font-bold text-[25px]'>Dash-Board</h1>
+        <input
+          type="text"
+          placeholder="Type here"
+          className="input input-bordered input-info w-full max-w-xs mt-5"
+        />
+        <button className='btn bg-blue-400 ml-3 text-white'>Add</button>
+        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+        
+      </div>
     </>
   );
 };
