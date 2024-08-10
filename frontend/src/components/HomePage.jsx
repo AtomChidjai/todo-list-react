@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     setLoading(true);
@@ -32,7 +35,10 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>DashBoard</h1>
+      <div className='absolute font-black text-[30px] left-[20px] top-[20px] block hover:cursor-pointer'>TODOLIST ✅</div>
+      <div className='btn btn-error absolute text-[15px] text-white right-[20px] top-[20px] hover:cursor-pointer'>LOGOUT</div>
+
+      <h1 className='mt-[100px]'>DashBoard</h1>
       <button onClick={fetchData} disabled={loading}>
         {loading ? 'Loading...' : 'Fetch Data'}
       </button>
