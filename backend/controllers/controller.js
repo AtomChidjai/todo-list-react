@@ -129,15 +129,17 @@ export async function loginResponse(req, res) {
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 3600000
+            maxAge: 3600000,
+            path: '/',
         });
 
-        return res.status(200).json({ message: 'Login Successfully', token });
+        return res.status(200).json({ message: 'Login Successfully' });
 
     } catch (err) {
         res.status(500).json({ error: `Error occurred: ${err.message}` });
     }
 }
+
 
 export async function deleteUserResponse(req, res) {
     const { _id } = req.body;

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const RegisterPage = () => {
     return (
@@ -50,12 +51,16 @@ const RegisterPage = () => {
                         </label>
                         <button className='flex btn btn-primary w-[450px] mx-auto text-[15px]'>Sign Up</button>
 
-                        <div className='text-center mx-auto mt-[40px]'>Already have an acocout? <a className="link link-info">Sign In</a> </div>
+                        <div className='text-center mx-auto mt-[40px]'>Already have an acocout? <Link to='/' className="link link-info">Sign In</Link> </div>
 
                     </div>
 
                 </div>
                 <div className='w-1/2 bg-blue-400 w-[50%]'>
+                    <img
+                        src="https://img.freepik.com/free-photo/empty-sea-beach-background_74190-313.jpg?t=st=1723289221~exp=1723292821~hmac=2328f57d9eefbb58343bc3ed32b98c748bb800d72a7a732ea2f156ff5156450d&w=1380"
+                        className='w-full h-full object-cover'
+                    />
                 </div>
             </div>
         </>

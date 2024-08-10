@@ -7,7 +7,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export function validateUser (req, res, next) {
     const { username, password } = req.body;
-
+    
     if (!username || !password) {
         return res.status(400).json({ error: 'Username and password are required' });
     }
@@ -27,7 +27,7 @@ export function validateId (req, res, next) {
 
 export function authenticateToken (req, res, next) {
     const token = req.cookies.token;
-    
+    console.log(token);
     if (!token) {
         return res.status(401).json({ message : 'NO TOKEN!'})
     }
