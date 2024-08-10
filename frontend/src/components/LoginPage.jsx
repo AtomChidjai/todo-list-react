@@ -4,10 +4,14 @@ const LoginPage = () => {
   return (
     <>
       <div className='flex h-screen'>
+        <div className='absolute font-black text-[30px] left-[20px] top-[20px] block hover:cursor-pointer'>TODOLIST ✅</div>
         <div className='w-1/2 flex justify-center'>
+
           <div className='w-[50%] my-auto'>
-            <span className='mx-auto text-[30px] text-[#5e5e5e] mb-5'>Welcome to our website ✌️</span>
-            <label className="input input-bordered flex items-center gap-2 w-[450px] mx-auto my-5">
+
+            <div className='text-center mx-auto text-[30px] text-[#5e5e5e] mb-[30px] font-bold'>Sign In</div>
+
+            <label className="input input-bordered flex items-center gap-2 w-[450px] mx-auto my-[30px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -18,7 +22,7 @@ const LoginPage = () => {
               </svg>
               <input type="text" className="grow" placeholder="Username" />
             </label>
-            <label className="input input-bordered flex items-center gap-2 w-[450px] mx-auto my-5">
+            <label className="input input-bordered flex items-center gap-2 w-[450px] mx-auto my-[30px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -32,8 +36,11 @@ const LoginPage = () => {
               <input type="password" className="grow" placeholder="Password" />
             </label>
             <button className='flex btn btn-primary w-[450px] mx-auto text-[15px]'>Sign In</button>
-            <span className='flex mx-auto mt-[40px]'>New to our website? <a className="ml-3 link link-info">Create account</a> </span>
+
+            <div className='text-center mx-auto mt-[40px]'>New to our website? <a className="link link-info">Create account</a> </div>
+
           </div>
+
         </div>
         <div className='w-1/2 bg-blue-400 w-[50%]'>
         </div>
