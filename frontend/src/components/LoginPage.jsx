@@ -10,7 +10,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/auth/login', {
+      const response = await fetch('/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,12 +22,17 @@ const LoginPage = () => {
         credentials: 'include'
       });
 
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
       navigate('/home');
 
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
 
   return (
     <>

@@ -10,7 +10,7 @@ const HomePage = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3000/auth', {
+      const response = await fetch('/auth', {
         method: 'GET',
         credentials: 'include',
       });
