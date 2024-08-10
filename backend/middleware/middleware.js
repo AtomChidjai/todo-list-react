@@ -27,7 +27,7 @@ export function validateId (req, res, next) {
 
 export function authenticateToken (req, res, next) {
     const token = req.cookies.token;
-    console.log(token);
+
     if (!token) {
         return res.status(401).json({ message : 'NO TOKEN!'})
     }
