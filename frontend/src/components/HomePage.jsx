@@ -6,6 +6,7 @@ const HomePage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [task, setTask] = useState('');
 
   const navigate = useNavigate();
 
@@ -71,6 +72,8 @@ const HomePage = () => {
             type="text"
             placeholder="Type here"
             className="input input-bordered input-info w-[600px] mt-5"
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
           />
           <button className='btn bg-blue-600 ml-3 text-white'>Add</button>
         </div>
