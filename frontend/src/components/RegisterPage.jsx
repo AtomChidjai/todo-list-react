@@ -97,7 +97,7 @@ const RegisterPage = () => {
                                     onChange={(e) => setConfPassword(e.target.value)} />
                             </label>
                             <button className='flex btn btn-primary w-[450px] mx-auto text-[15px]'>Sign Up</button>
-                            { errorMessage && <div className='text-red-400 text-center'>{errorMessage}</div> }
+                            { errorMessage && <div className='text-red-400 text-center mt-3'>{errorMessage}</div> }
                         </form>
                         <div className='text-center mx-auto mt-[40px]'>Already have an acocout? <Link to='/' className="link link-info">Sign In</Link> </div>
 
