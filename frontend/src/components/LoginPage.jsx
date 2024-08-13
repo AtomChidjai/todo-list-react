@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
@@ -23,13 +24,13 @@ const LoginPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Login failed');
+        throw new Error('Invalid Username or Password');
       }
 
       navigate('/home');
 
     } catch (error) {
-      console.error('Error:', error);
+      setErrorMessage(error.message)
     }
   };
 
@@ -78,6 +79,7 @@ const LoginPage = () => {
                   placeholder="Password" />
               </label>
               <button type="submit" className='flex btn btn-primary w-[450px] mx-auto text-[15px]'>Sign In</button>
+              { errorMessage && <div className='text-red-400 text-center'>{errorMessage}</div> }
             </form>
 
             <div className='text-center mx-auto mt-[40px]'>New to our website? <Link to='/register' className="link link-info">Create account</Link></div>

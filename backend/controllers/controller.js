@@ -131,7 +131,7 @@ export async function loginResponse(req, res) {
             secure: process.env.NODE_ENV === 'production',
             maxAge: 3600000,
             path: '/',
-            sameSite: 'Lax', // 'Strict', or 'None' depending on your setup
+            sameSite: 'Lax', 
         });
 
         return res.status(200).json({ message: 'Login Successfully' });
