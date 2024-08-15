@@ -4,17 +4,12 @@ import Card from './Card';
 
 const HomePage = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [task, setTask] = useState('');
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-
       try {
         const response = await fetch('/auth', {
           method: 'GET',
@@ -29,15 +24,30 @@ const HomePage = () => {
         setData(result);
         console.log('Response:', result);
       } catch (error) {
-        setError(error.message);
         console.error('Error:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
+
+  const taskHandler = async () => {
+    try {
+      const response = await fetch('/auth/post', {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content : task,
+        }),
+        credentials : 'include',
+      })
+    } catch (error) {
+      return;
+    }
+  }
+
 
   const handleLogout = async () => {
     try {
@@ -68,20 +78,20 @@ const HomePage = () => {
 
         <div className='text-center'>
           <h1 className='mt-[25px] font-bold text-[25px]'>Dash-Board</h1>
-          <input
-            type="text"
-            placeholder="Type here"
-            className="input input-bordered input-info w-[600px] mt-5"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-          />
-          <button className='btn bg-blue-600 ml-3 text-white'>Add</button>
+          <form onSubmit={taskHandler}>
+            <input
+              type="text"
+              placeholder="Type here"
+              className="input input-bordered input-info w-[600px] mt-5"
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+            />
+            <button className='btn bg-blue-600 ml-3 text-white'>Add</button>
+          </form>
         </div>
 
         <div className='mt-5 flex justify-center'> 
           <div className='flex flex-wrap w-auto'>
-            
-
             {data.length > 0 ? (
               data.map((item, index) => (
                 <Card key={index} desc={item.content} />
@@ -89,8 +99,6 @@ const HomePage = () => {
             ) : (
               <p>No data available. 😔</p>
             )}
-
-            
           </div>
         </div>
 
