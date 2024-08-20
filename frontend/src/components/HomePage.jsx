@@ -94,7 +94,9 @@ const HomePage = () => {
           <div className='flex flex-wrap w-auto'>
             {data.length > 0 ? (
               data.map((item, index) => (
-                <Card key={index} desc={item.content} />
+                <>
+                  <Card key={index} desc={item.content} id={item._id}/>
+                </>
               ))
             ) : (
               <p>No data available. 😔</p>

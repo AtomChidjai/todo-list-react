@@ -36,7 +36,7 @@ export async function updateResponse (req, res) {
         const updatedObject = { content };
 
         const updatedTask = await Task.findOneAndUpdate(
-            { _id: taskId, userId }, // checks if its have corresponding userId and TaskId
+            { _id: taskId, userId },
             updatedObject,
             { new : true }
         );
