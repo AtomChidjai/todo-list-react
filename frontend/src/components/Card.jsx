@@ -22,6 +22,23 @@ const Card = ({ desc, id, onDelete }) => {
     }
   };
 
+  const TaskUpdateHandler = async () => {
+    try {
+      const response = await fetch(`/auth/update/${id}`, {
+        method : 'PUT',
+        headers : {
+          'Content-Type' : 'application/json',
+        }, 
+        credentials : 'include',
+      });
+      if (response.ok) {
+        
+      }
+    } catch (error) {
+      console.log('Update Error : ', error)
+    }
+  };
+
   return (
     <div className="card bg-blue-500 text-white w-[400px] mr-5 mt-5">
       <div className="card-body">
@@ -29,7 +46,7 @@ const Card = ({ desc, id, onDelete }) => {
           <h2 className="card-title">Todo</h2>
           <button className='btn btn-circle right-[30px]' onClick={TaskDeleteHandler}>❌</button>
         </div>
-        <p>{desc} / {id}</p>
+        <p>{desc}</p>
         <div className="card-actions justify-end">
           <button className="btn btn-rounded">Edit</button>
         </div>
