@@ -59,7 +59,7 @@ export async function deleteResponse(req, res) {
         return res.status(400).json({ error: 'User ID is required' });
     }
     try {
-        const deletedTask = await Task.findOneAndDelete(taskId);
+        const deletedTask = await Task.findOneAndDelete({ _id : taskId, userId });
         
         if (!deletedTask) {
             return res.status(404).json({ error: 'Task not found' });

@@ -5,7 +5,6 @@ import Card from './Card';
 const HomePage = () => {
   const [data, setData] = useState([]);
   const [task, setTask] = useState('');
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,23 +30,33 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  const taskHandler = async () => {
+  const taskHandler = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch('/auth/post', {
-        method : 'POST',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          content : task,
-        }),
-        credentials : 'include',
-      })
-    } catch (error) {
-      return;
-    }
-  }
+        body: JSON.stringify({ content: task }),
+        credentials: 'include',
+      });
 
+      if (response.ok) {
+        const newTask = await response.json();
+        setData(prevData => [...prevData, newTask]);
+        setTask('');
+      } else {
+        console.error('Failed to add task');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleDelete = (id) => {
+    setData(prevData => prevData.filter(task => task._id !== id));
+  };
 
   const handleLogout = async () => {
     try {
@@ -75,7 +84,6 @@ const HomePage = () => {
       </div>
       <div className='bg-blue-500 w-full h-[90px]'></div>
       <div className='mx-auto w-full'>
-
         <div className='text-center'>
           <h1 className='mt-[25px] font-bold text-[25px]'>Dash-Board</h1>
           <form onSubmit={taskHandler}>
@@ -86,24 +94,26 @@ const HomePage = () => {
               value={task}
               onChange={(e) => setTask(e.target.value)}
             />
-            <button className='btn bg-blue-600 ml-3 text-white'>Add</button>
+            <button type="submit" className='btn bg-blue-600 ml-3 text-white'>Add</button>
           </form>
         </div>
 
         <div className='mt-5 flex justify-center'> 
           <div className='flex flex-wrap w-auto'>
             {data.length > 0 ? (
-              data.map((item, index) => (
-                <>
-                  <Card key={index} desc={item.content} id={item._id}/>
-                </>
+              data.map((item) => (
+                <Card 
+                  key={item._id} 
+                  desc={item.content} 
+                  id={item._id} 
+                  onDelete={handleDelete} 
+                />
               ))
             ) : (
-              <p>No data available. 😔</p>
+              <p>No task available. 😔</p>
             )}
           </div>
         </div>
-
       </div>
     </>
   );
