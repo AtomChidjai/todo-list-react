@@ -100,7 +100,7 @@ const HomePage = () => {
               value={task}
               onChange={(e) => setTask(e.target.value)}
             />
-            <button type="submit" className="btn bg-blue-600 text-white">Add</button>
+            <button type="submit" className="btn bg-blue-600 text-white">Add Task</button>
           </form>
         </div>
 

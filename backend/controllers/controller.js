@@ -123,17 +123,17 @@ export async function loginResponse(req, res) {
         const token = jwt.sign(
             { userId: user._id, username: user.username },
             JWT_SECRET,
-            { expiresIn: '1h' }
+            { expiresIn: '6h' }
         );
-
+        
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 3600000,
+            maxAge: 6 * 60 * 60 * 1000,
             path: '/',
             sameSite: 'Lax', 
         });
-
+        
         return res.status(200).json({ message: 'Login Successfully' });
 
     } catch (err) {
