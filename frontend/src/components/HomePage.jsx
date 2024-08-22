@@ -21,7 +21,7 @@ const HomePage = () => {
 
         const result = await response.json();
         setData(result);
-        console.log('Response:', result);
+
       } catch (error) {
         console.error('Error:', error);
       }
