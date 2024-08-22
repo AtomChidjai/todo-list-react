@@ -37,8 +37,6 @@ const Card = ({ desc, id, onDelete, onUpdate }) => {
 
       if (response.ok) {
         onDelete(id);
-      } else {
-        console.error('Failed to delete task');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -54,7 +52,7 @@ const Card = ({ desc, id, onDelete, onUpdate }) => {
           <div className='flex justify-between items-center'>
             <h2 className="card-title text-lg font-bold">Todo</h2>
             <button
-              className='btn btn-circle btn-sm text-red-500 bg-white hover:bg-red-500 hover:text-white border-none'
+              className='btn btn-circle btn-sm text-red-500 bg-white border-none'
               onClick={TaskDeleteHandler}>
               ❌
             </button>

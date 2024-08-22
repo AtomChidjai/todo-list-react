@@ -4,7 +4,8 @@ import { useState } from 'react';
 const InputModal = ({ InputModalToggle, closeInputModal, onUpdate, id }) => {
     const [upContent, setUpContent] = useState('');
 
-    const TaskUpdateHandler = async () => {
+    const TaskUpdateHandler = async (e) => {
+        e.preventDefault();
         try {
             const response = await fetch(`/auth/update/${id}`, {
                 method: 'PUT',
@@ -16,7 +17,9 @@ const InputModal = ({ InputModalToggle, closeInputModal, onUpdate, id }) => {
             });
             if (response.ok) {
                 onUpdate(id, upContent);
+                closeInputModal();
             }
+
         } catch (error) {
             console.log('Update Error : ', error)
         }
