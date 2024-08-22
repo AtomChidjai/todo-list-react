@@ -16,6 +16,10 @@ app.use(cors());
 
 app.use('/auth', router);
 
+app.get('/', (req, res) => {
+    res.send('Hello Vercel');
+});
+
 mongoose.connect(process.env.MONGO_DB_CONNECTION)
 .then( () => {
     console.log('MongoDB connected');
