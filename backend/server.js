@@ -16,6 +16,8 @@ app.use(cors({
     credentials: true,
 }));
 
+console.log(`This is a Frontend url : ${process.env.FRONTEND_URL}`);
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
