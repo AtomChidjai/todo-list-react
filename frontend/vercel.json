@@ -1,9 +1,8 @@
 {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
-      }
-    ]
-  }
-  
+  "rewrites": [
+    {
+      "source": "/auth/(.*)",
+      "destination": "https://todo-list-react-backend-zeta.vercel.app/$1"
+    }
+  ]
+}
