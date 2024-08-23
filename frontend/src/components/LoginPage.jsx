@@ -11,7 +11,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_URL}/auth/login`, {
+      const response = await fetch(`/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
