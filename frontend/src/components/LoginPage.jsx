@@ -81,7 +81,7 @@ const LoginPage = () => {
               <button type="submit" className='flex btn btn-primary w-[450px] mx-auto text-[15px]'>Sign In</button>
               { errorMessage && <div className='text-red-400 text-center mt-3'>{errorMessage}</div> }
             </form>
-            backend url : { import.meta.env.VITE_REACT_BACKEND_URL }
+            
             <div className='text-center mx-auto mt-[40px]'>New to our website? <Link to='/register' className="link link-info">Create account</Link></div>
             
           </div>
