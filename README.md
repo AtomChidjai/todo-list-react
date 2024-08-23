@@ -8,8 +8,9 @@
 
 
 ## Screenshots
+![image](https://github.com/user-attachments/assets/11d77c9b-0597-4c44-b4ab-87063dad785c)
 
-
+![image](https://github.com/user-attachments/assets/e186bdc0-e402-42ba-86e4-8964a8cda7e5)
 
 ## Feature: Task Management
 
