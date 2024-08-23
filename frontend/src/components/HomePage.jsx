@@ -6,7 +6,7 @@ const HomePage = () => {
   const [data, setData] = useState([]);
   const [task, setTask] = useState('');
   const navigate = useNavigate();
-
+  // this is comment for git commit
   useEffect(() => {
     const fetchData = async () => {
       try {
