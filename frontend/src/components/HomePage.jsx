@@ -10,7 +10,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/auth`, {
+        const response = await fetch(`/auth/get`, {
           method: 'GET',
           credentials: 'include',
         });

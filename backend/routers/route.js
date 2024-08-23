@@ -12,7 +12,7 @@ import { validateUser, validateId, authenticateToken, decodedToken } from '../mi
 
 const router = express.Router();
 
-router.get('/', authenticateToken, decodedToken, getResponse);
+router.get('/get', authenticateToken, decodedToken, getResponse);
 router.post('/post', authenticateToken, decodedToken, postResponse);
 router.put('/update/:taskId', authenticateToken, decodedToken, updateResponse);
 router.delete('/del/:taskId', authenticateToken, decodedToken, deleteResponse);
