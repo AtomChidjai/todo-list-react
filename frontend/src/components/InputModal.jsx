@@ -7,7 +7,7 @@ const InputModal = ({ InputModalToggle, closeInputModal, onUpdate, id }) => {
     const TaskUpdateHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_URL}/auth/update/${id}`, {
+            const response = await fetch(`/auth/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

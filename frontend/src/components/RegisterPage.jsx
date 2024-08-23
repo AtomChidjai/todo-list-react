@@ -15,7 +15,7 @@ const RegisterPage = () => {
             return;
         }
         try {
-            const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_URL}/auth/register`, {
+            const response = await fetch(`/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

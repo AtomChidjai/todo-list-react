@@ -27,7 +27,7 @@ const Card = ({ desc, id, onDelete, onUpdate }) => {
 
   const TaskDeleteHandler = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_URL}/auth/del/${id}`, {
+      const response = await fetch(`/auth/del/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

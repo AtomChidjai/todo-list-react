@@ -10,7 +10,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_URL}/auth`, {
+        const response = await fetch(`/auth`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -33,7 +33,7 @@ const HomePage = () => {
   const taskHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_URL}/auth/post`, {
+      const response = await fetch(`/auth/post`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const HomePage = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_URL}/auth/logout`, { method: 'POST', credentials: 'include' });
+      const response = await fetch(`/auth/logout`, { method: 'POST', credentials: 'include' });
       if (response.ok) {
         navigate('/');
       } else {
