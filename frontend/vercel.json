@@ -3,6 +3,10 @@
     {
       "source": "/auth/(.*)",
       "destination": "https://todo-list-react-backend-zeta.vercel.app/auth/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
